@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
+  /* Brand accents */
   --navy: #0f3d7e;
-  --navy-deep: #0a2c5c;
   --orange: #f15a22;
-  --orange-light: #ff7a45;
-  --ink: #0c1b33;
-  --paper: #f6f4ef;
+  --orange-light: #ff8a4c;
 
-  color-scheme: light;
+  /* Wood / handcraft palette */
+  --wood-darkest: #1f130a;
+  --wood-deep: #2c1a0e;
+  --wood-walnut: #3f2817;
+  --wood-mid: #6b4226;
+  --wood-oak: #c8975a;
+  --sawdust: #e8b878;
+  --cream: #f6e9d2;
+  --cream-soft: #efe0c4;
+
+  color-scheme: dark;
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
@@ -25,8 +33,8 @@ body,
 }
 
 body {
-  background: var(--navy-deep);
-  color: #fff;
+  background: var(--wood-darkest);
+  color: var(--cream);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }

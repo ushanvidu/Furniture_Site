@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from 'react'
 import Logo from './components/Logo.jsx'
 import './App.css'
 
-// Launch target — adjust this date as needed
-const LAUNCH_DATE = new Date('2026-07-25T09:00:00')
+// Estimated time the workshop reopens — adjust this date as needed
+const LAUNCH_DATE = new Date('2026-06-13T18:00:00')
 
 function getRemaining() {
   const diff = Math.max(0, LAUNCH_DATE.getTime() - Date.now())
@@ -41,8 +41,8 @@ function Countdown() {
   )
 }
 
-// Decorative floating furniture glyphs
-const FLOATERS = ['🛋️', '🪑', '🛏️', '🚪', '🪞', '🕯️', '🪟', '🧺']
+// Decorative floating woodworking + furniture glyphs
+const FLOATERS = ['🔨', '🪚', '🪵', '🪑', '🛠️', '🪛', '📐', '🧰']
 
 function Floaters() {
   const items = useMemo(
@@ -109,21 +109,22 @@ function App() {
         <section className="hero">
           <div className="badge" style={{ '--d': '0.25s' }}>
             <span className="badge-dot" />
-            Launching Soon
+            Under Maintenance
           </div>
 
           <h1 className="headline" style={{ '--d': '0.4s' }}>
-            Crafting Your
-            <span className="grad"> Dream Space</span>
+            Pardon Our
+            <span className="grad"> Sawdust</span>
           </h1>
 
           <p className="subtitle" style={{ '--d': '0.55s' }}>
-            We're putting the finishing touches on an exclusive online destination
-            for premium, handcrafted furniture. Sign up to be the first through the
-            door — and unlock an inaugural launch-day discount.
+            Our workshop is closed for a short while as we sand down the rough
+            edges and polish the details. We're handcrafting a better experience —
+            do drop your email and we'll let you know the moment the doors reopen.
           </p>
 
           <div className="cd-wrap" style={{ '--d': '0.7s' }}>
+            <p className="cd-label">Back up &amp; running in</p>
             <Countdown />
           </div>
 
@@ -139,16 +140,16 @@ function App() {
               />
               <button type="submit" disabled={status === 'loading'} data-status={status}>
                 {status === 'loading'
-                  ? 'Joining…'
+                  ? 'Sending…'
                   : status === 'success'
-                  ? "You're in! ✓"
+                  ? "You're on the list! ✓"
                   : 'Notify Me'}
               </button>
             </div>
             <p className={`form-note ${status === 'success' ? 'show' : ''}`}>
               {status === 'success'
-                ? "🎉 Thanks! We'll email you the moment we open."
-                : 'No spam — just one launch announcement.'}
+                ? "🪵 Thanks! We'll email you the moment the workshop reopens."
+                : "No spam — just one note when we're back."}
             </p>
           </form>
 
@@ -169,7 +170,7 @@ function App() {
         <footer className="foot" style={{ '--d': '1.15s' }}>
           <span>© {new Date().getFullYear()} Rialto Furniture</span>
           <span className="dot-sep">•</span>
-          <span>Designed for living beautifully</span>
+          <span>Handcrafted with care since day one</span>
         </footer>
       </main>
     </div>
