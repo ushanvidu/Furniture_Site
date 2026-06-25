@@ -1,80 +1,19 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState } from 'react'
 import Logo from './components/Logo.jsx'
+import OfficeChair from './components/OfficeChair.jsx'
 import './App.css'
 
-// Estimated time the workshop reopens — adjust this date as needed
-const LAUNCH_DATE = new Date('2026-06-13T18:00:00')
+const FEATURES = [
+  { icon: ChairIcon, label: 'Timeless\nDesigns' },
+  { icon: HeartIcon, label: 'Built for\nComfort' },
+  { icon: HomeIcon, label: 'Made for\nYour Space' },
+]
 
-function getRemaining() {
-  const diff = Math.max(0, LAUNCH_DATE.getTime() - Date.now())
-  const days = Math.floor(diff / 86400000)
-  const hours = Math.floor((diff % 86400000) / 3600000)
-  const minutes = Math.floor((diff % 3600000) / 60000)
-  const seconds = Math.floor((diff % 60000) / 1000)
-  return { days, hours, minutes, seconds }
-}
-
-function Countdown() {
-  const [time, setTime] = useState(getRemaining)
-
-  useEffect(() => {
-    const id = setInterval(() => setTime(getRemaining()), 1000)
-    return () => clearInterval(id)
-  }, [])
-
-  const units = [
-    { label: 'Days', value: time.days },
-    { label: 'Hours', value: time.hours },
-    { label: 'Minutes', value: time.minutes },
-    { label: 'Seconds', value: time.seconds },
-  ]
-
-  return (
-    <div className="countdown">
-      {units.map((u, i) => (
-        <div className="count-box" key={u.label} style={{ '--i': i }}>
-          <div className="count-value">{String(u.value).padStart(2, '0')}</div>
-          <div className="count-label">{u.label}</div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-// Decorative floating woodworking + furniture glyphs
-const FLOATERS = ['🔨', '🪚', '🪵', '🪑', '🛠️', '🪛', '📐', '🧰']
-
-function Floaters() {
-  const items = useMemo(
-    () =>
-      FLOATERS.map((glyph, i) => ({
-        glyph,
-        left: `${(i * 12 + 6) % 96}%`,
-        delay: `${i * 1.3}s`,
-        duration: `${14 + (i % 4) * 4}s`,
-        size: `${1.4 + (i % 3) * 0.5}rem`,
-      })),
-    []
-  )
-  return (
-    <div className="floaters" aria-hidden="true">
-      {items.map((it, i) => (
-        <span
-          key={i}
-          className="floater"
-          style={{
-            left: it.left,
-            animationDelay: it.delay,
-            animationDuration: it.duration,
-            fontSize: it.size,
-          }}
-        >
-          {it.glyph}
-        </span>
-      ))}
-    </div>
-  )
-}
+const SHOWCASE = [
+  { tone: 'slate', uid: 'a' },
+  { tone: 'navy', uid: 'b' },
+  { tone: 'midnight', uid: 'c' },
+]
 
 function App() {
   const [email, setEmail] = useState('')
@@ -95,11 +34,10 @@ function App() {
     <div className="page">
       {/* Animated background layers */}
       <div className="bg-gradient" aria-hidden="true" />
+      <div className="spotlight" aria-hidden="true" />
       <div className="blob blob-1" aria-hidden="true" />
       <div className="blob blob-2" aria-hidden="true" />
-      <div className="blob blob-3" aria-hidden="true" />
       <div className="grid-overlay" aria-hidden="true" />
-      <Floaters />
 
       <main className="container">
         <header className="top" style={{ '--d': '0.1s' }}>
@@ -108,27 +46,63 @@ function App() {
 
         <section className="hero">
           <div className="badge" style={{ '--d': '0.25s' }}>
-            <span className="badge-dot" />
-            Under Maintenance
+            <span className="badge-tools" aria-hidden="true">⚒</span>
+            We&rsquo;re Under Maintenance
           </div>
 
           <h1 className="headline" style={{ '--d': '0.4s' }}>
-            Pardon Our
-            <span className="grad"> Sawdust</span>
+            Crafting Something
+            <span className="grad">Beautiful</span>
+            <span className="headline-sub">Just For You</span>
           </h1>
 
-          <p className="subtitle" style={{ '--d': '0.55s' }}>
-            Our workshop is closed for a short while as we sand down the rough
-            edges and polish the details. We're handcrafting a better experience —
-            do drop your email and we'll let you know the moment the doors reopen.
-          </p>
-
-          <div className="cd-wrap" style={{ '--d': '0.7s' }}>
-            <p className="cd-label">Back up &amp; running in</p>
-            <Countdown />
+          <div className="divider" style={{ '--d': '0.5s' }}>
+            <span className="divider-heart">♥</span>
           </div>
 
-          <form className="notify" onSubmit={handleSubmit} style={{ '--d': '0.85s' }}>
+          <p className="subtitle" style={{ '--d': '0.55s' }}>
+            Our website is getting a fresh new look and feel. We&rsquo;re fine-tuning
+            every detail to bring you a smoother experience.
+          </p>
+
+          <p className="back-soon" style={{ '--d': '0.65s' }}>
+            We&rsquo;ll be back very soon!
+          </p>
+
+          <p className="tagline" style={{ '--d': '0.75s' }}>
+            Where <em>Comfort</em> Meets <em>Style</em>
+          </p>
+
+          {/* Office chair showcase */}
+          <div className="showcase" style={{ '--d': '0.85s' }}>
+            {SHOWCASE.map((c, i) => (
+              <div className={`chair chair-${i}`} key={c.uid} style={{ '--ci': i }}>
+                <OfficeChair tone={c.tone} uid={c.uid} />
+                <span className="chair-shadow" />
+              </div>
+            ))}
+          </div>
+
+          {/* Feature highlights */}
+          <div className="features" style={{ '--d': '0.95s' }}>
+            {FEATURES.map(({ icon: Icon, label }, i) => (
+              <div className="feature" key={label}>
+                <Icon />
+                <span className="feature-label">
+                  {label.split('\n').map((l, j) => (
+                    <span key={j}>{l}</span>
+                  ))}
+                </span>
+                {i < FEATURES.length - 1 && <span className="feature-sep" />}
+              </div>
+            ))}
+          </div>
+
+          {/* Notify form */}
+          <form className="notify" onSubmit={handleSubmit} style={{ '--d': '1.05s' }}>
+            <p className="notify-lead">
+              <MailIcon /> Stay updated! Drop your email and be the first to know.
+            </p>
             <div className="field">
               <input
                 type="email"
@@ -148,12 +122,12 @@ function App() {
             </div>
             <p className={`form-note ${status === 'success' ? 'show' : ''}`}>
               {status === 'success'
-                ? "🪵 Thanks! We'll email you the moment the workshop reopens."
-                : "No spam — just one note when we're back."}
+                ? "🎉 Thanks! We'll email you the moment we're back."
+                : 'No spam — just one note when we reopen.'}
             </p>
           </form>
 
-          <div className="socials" style={{ '--d': '1s' }}>
+          <div className="socials" style={{ '--d': '1.15s' }}>
             {[
               { name: 'Instagram', href: '#', icon: IgIcon },
               { name: 'Facebook', href: '#', icon: FbIcon },
@@ -167,17 +141,41 @@ function App() {
           </div>
         </section>
 
-        <footer className="foot" style={{ '--d': '1.15s' }}>
+        <footer className="foot" style={{ '--d': '1.25s' }}>
           <span>© {new Date().getFullYear()} Rialto Furniture</span>
           <span className="dot-sep">•</span>
-          <span>Handcrafted with care since day one</span>
+          <span>Premium office seating, crafted for you</span>
         </footer>
       </main>
     </div>
   )
 }
 
-/* --- Inline social icons --- */
+/* --- Feature icons --- */
+function ChairIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 4h10v8H7z" />
+      <path d="M7 12v4h10v-4M9 16v3M15 16v3M8 19h8" />
+    </svg>
+  )
+}
+function HeartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 6 4 3-2.8 4-4 6-4 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z" />
+    </svg>
+  )
+}
+function HomeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 11l9-7 9 7M5 10v10h14V10M9 20v-6h6v6" />
+    </svg>
+  )
+}
+
+/* --- Social icons --- */
 function IgIcon() {
   return (
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">

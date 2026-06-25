@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   /* Brand accents */
   --navy: #0f3d7e;
   --orange: #f15a22;
-  --orange-light: #ff8a4c;
 
-  /* Wood / handcraft palette */
-  --wood-darkest: #1f130a;
-  --wood-deep: #2c1a0e;
-  --wood-walnut: #3f2817;
-  --wood-mid: #6b4226;
-  --wood-oak: #c8975a;
-  --sawdust: #e8b878;
-  --cream: #f6e9d2;
-  --cream-soft: #efe0c4;
+  /* Navy + gold palette (from reference) */
+  --navy-darkest: #08152b;
+  --navy-deep: #0c1f3d;
+  --navy-mid: #122c52;
+  --navy-soft: #1b3a66;
+
+  --gold: #c89b54;
+  --gold-light: #e0bd7e;
+  --gold-bright: #f0d49a;
+
+  --cream: #f4ecdc;
+  --cream-soft: #e7dcc6;
+  --muted: #b9c4d6;
 
   color-scheme: dark;
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -33,7 +36,7 @@ body,
 }
 
 body {
-  background: var(--wood-darkest);
+  background: var(--navy-darkest);
   color: var(--cream);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
